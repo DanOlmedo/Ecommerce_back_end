@@ -24,14 +24,38 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new tag
+  Tag.create(req.body)
+     .then((tag) => {
+       
+       res.status(200).json(tag);
+     })
+     .catch((err) => {
+       console.log(err);
+       res.status(400).json(err);
+     });
 });
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  Tag.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+  .catch((err) => {
+      // console.log(err);
+      res.status(400).json(err);
+    });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
+  const tagData = await Tag.findByPk(req.params.id);
+    if (!tagData) {
+      res.status(404).json({ message: 'No tag with this id!' });
+      return;
+    }
+    res.status(200).splice(tagData)
 });
 
 module.exports = router;

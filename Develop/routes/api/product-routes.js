@@ -45,10 +45,6 @@ router.post('/', async (req, res) => {
 //       tagIds: [1, 2, 3, 4]
 //     }
   
-//  let newProduct = newProd;
- 
-
-//   res.json(newProduct);
    Product.create(req.body)
      .then((product) => {
         // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -115,6 +111,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  
 });
 
 module.exports = router;

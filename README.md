@@ -242,9 +242,10 @@ This homework is graded based on the following criteria:
 
 You are required to submit BOTH of the following for review:
 
-* A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
+* A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met: https://drive.google.com/file/d/1dbOo2Rq9mI3IWb6C0jUfbGJt1MIqei6y/view?usp=sharing
 
-* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
+* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project:
+* https://github.com/DanOlmedo/Ecommerce_back_end
 
 ---
 © 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.

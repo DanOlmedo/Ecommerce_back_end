@@ -6,7 +6,7 @@ const { sequelize } = require('../../models/Product');
 
 // get all products
 router.get('/', async (req, res) => {
-  // find all products
+  // find all productsc
   // be sure to include its associated Category and Tag data
    const productData = await Product.findAll();
    res.json(productData)
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -36,6 +36,7 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
+ 
 
   Product.create(req.body)
     .then((product) => {

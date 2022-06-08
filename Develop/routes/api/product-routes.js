@@ -1,8 +1,16 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 const { sequelize } = require('../../models/Product');
-
+const express = require('express');
+const bodyParser = require('body-parser')
 // The `/api/products` endpoint
+
+router.use(express.json());
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded());
+router.use(bodyParser.urlencoded({
+  extender: true
+}))
 
 // get all products
 router.get('/', async (req, res) => {
@@ -28,36 +36,39 @@ router.get('/:id', async (req, res) => {
 
 // create new product
 router.post('/', async (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
+
+//   let newProd = 
+//     {
+//       product_name: req.body.product_name,
+//       price: 200.00,
+//       stock: 3,
+//       tagIds: [1, 2, 3, 4]
+//     }
+  
+//  let newProduct = newProd;
  
 
-  Product.create(req.body)
-    .then((product) => {
-      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
-        const productTagIdArr = req.body.tagIds.map((tag_id) => {
-          return {
-            product_id: product.id,
-            tag_id,
-          };
-        });
-        return ProductTag.bulkCreate(productTagIdArr);
-      }
-      // if no product tags, just respond
-      res.status(200).json(product);
-    })
-    .then((productTagIds) => res.status(200).json(productTagIds))
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
-    });
+//   res.json(newProduct);
+   Product.create(req.body)
+     .then((product) => {
+        // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+       if (req.body.tagIds.length) {
+         const productTagIdArr = req.body.tagIds.map((tag_id) => {
+           return {
+             product_id: product.id,
+             tag_id,
+           };
+         });
+         return ProductTag.bulkCreate(productTagIdArr);
+       }
+        // if no product tags, just respond
+       res.status(200).json(product);
+     })
+     .then((productTagIds) => res.status(200).json(productTagIds))
+     .catch((err) => {
+       console.log(err);
+       res.status(400).json(err);
+     });
 });
 
 // update product
